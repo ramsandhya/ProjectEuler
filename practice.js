@@ -3,7 +3,7 @@
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 //
 // Find the sum of all the multiples of 3 or 5 below 1000.
-function multiples(n){
+function sumOfMultiples(n){
   var sum = 0;
   for (var i = 0; i < n; i++) {
     if ((i % 3 === 0) || (i % 5 === 0)) {
@@ -13,7 +13,7 @@ function multiples(n){
   console.log(sum);
   return sum;
 }
-multiples(1000)
+sumOfMultiples(100)
 
 // Even Fibonacci numbers
 // Problem 2
@@ -40,8 +40,76 @@ function sumOfEvenFib(n){
  }
  sumOfEvenFib(9)
 
+// Not PE- To find if a given number is prime or not
+// Prime number assumption- A number has its largest factor when divided by 2 i.e. right in the middle. So, this algorithm assumption saves a lot of calculation. So, instead of calculating each number from beginning or end, we could start checking the prime numbers or largest prime factor starting at the middle.
+
+  function prime(n) {
+    var isPrime = true;
+    for (var i = Math.floor(n/2); i > 0; i--) {
+      if (i === 1) {
+        console.log(n + " is prime");
+      }
+      else if (n % i === 0) {
+        isPrime = false;
+        console.log(n + " is not prime");
+        break;
+      }
+    }
+  }
+  prime(96)
+
  // Largest prime factor
  // Problem 3
  // The prime factors of 13195 are 5, 7, 13 and 29.
  //
  // What is the largest prime factor of the number 600851475143 ?
+
+ function largestPrimeFactor(n){
+   var factors = [];
+   var isPrime = false;
+   for (var i = Math.floor(n/2); i > 0; i--) {
+     if ((n % i) === 0) {
+       for (var j = Math.floor(i/2); j > 0; j--) {
+         if (j === 1) {
+           isPrime = true;
+           console.log(i + " is the largest prime factor of " + n);
+           return;
+         }
+         else if ((i % j) === 0) {
+           isPrime = false;
+           break;
+         }
+       }
+     }
+   }
+ }
+ largestPrimeFactor(26);
+
+ // Largest palindrome product
+ // Problem 4
+ // A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+ //
+ // Find the largest palindrome made from the product of two 3-digit numbers.
+
+ function palindrome(){    
+    for (var i = 99; i >= 90; i--) {
+      for (var j = i; j >= 90; j--) {
+        var prod = i * j;
+        var prodString = prod.toString();
+        var prodArray = prodString.split("");
+        var forLOOP = true;
+        //for (var k = 0; k <= prodArray.length/2 && forLOOP; k++) {
+          for (var k= 0, l = (prodArray.length - 1); k <= prodArray.length/2 && l >= prodArray.length/2 ; k++, l--) {
+            if (prodArray[k] != prodArray[l]) {
+              forLOOP = false;
+              break;
+            }
+          }
+        //}
+        if(forLOOP){
+        console.log(prodString, i, j);
+        }
+      }
+    }
+ }
+palindrome()
